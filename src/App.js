@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./../src/App.css";
+import InputWithLabel from "./components/InputWIthLabel";
 
 const App = () => {
   const [gameName, setGameName] = useState("");
@@ -11,19 +12,17 @@ const App = () => {
         React app
         <hr></hr>
       </h2>
-      <label data-game-label>Name of the game</label>
-      <input
-        data-game-field
-        type="text"
-        value={gameName}
-        onChange={event => setGameName(event.target.value)}
+      <InputWithLabel
+        data-game
+        label="Name of the game"
+        inputValue={gameName}
+        changeHandler={event => setGameName(event.target.value)}
       />
-      <label data-genre-label>Game genre</label>
-      <input
-        data-genre-field
-        type="text"
-        value={genreName}
-        onChange={event => setGenreName(event.target.value)}
+      <InputWithLabel
+        data-genre
+        label="Game genre"
+        inputValue={genreName}
+        changeHandler={event => setGenreName(event.target.value)}
       />
       <button
         type="submit"

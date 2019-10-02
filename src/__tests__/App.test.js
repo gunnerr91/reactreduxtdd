@@ -92,44 +92,44 @@ describe("App component", () => {
 
   it("should have two input fields and labels", () => {
     let component = shallow(<App />);
-    expect(component.find("[data-game-field]")).toHaveLength(1);
-    expect(component.find("[data-genre-field]")).toHaveLength(1);
-    expect(component.find("[data-game-label]")).toHaveLength(1);
-    expect(component.find("[data-genre-label]")).toHaveLength(1);
+
+    expect(component.find("InputWithLabel")).toHaveLength(2);
   });
 
   it("should store game input in a state", () => {
     let component = shallow(<App />);
-    expect(component.find("[data-game-field]").props().value).toBe("");
+    expect(component.find("InputWithLabel").get(0).props.inputValue).toBe("");
   });
 
   it("should update the state when game input on change is called", () => {
     let component = shallow(<App />);
-    expect(component.find("[data-game-field]").props().value).toBe("");
+    expect(component.find("InputWithLabel").get(0).props.inputValue).toBe("");
     component
-      .find("[data-game-field]")
-      .props()
-      .onChange({
+      .find("InputWithLabel")
+      .get(0)
+      .props.changeHandler({
         target: { value: "new name" }
       });
-    expect(component.find("[data-game-field]").props().value).toBe("new name");
+    expect(component.find("InputWithLabel").get(0).props.inputValue).toBe(
+      "new name"
+    );
   });
 
   it("should store genre input in a state", () => {
     let component = shallow(<App />);
-    expect(component.find("[data-genre-field]").props().value).toBe("");
+    expect(component.find("InputWithLabel").get(1).props.inputValue).toBe("");
   });
 
   it("should update the state when genre input on change is called", () => {
     let component = shallow(<App />);
-    expect(component.find("[data-genre-field]").props().value).toBe("");
+    expect(component.find("InputWithLabel").get(1).props.inputValue).toBe("");
     component
-      .find("[data-genre-field]")
-      .props()
-      .onChange({
+      .find("InputWithLabel")
+      .get(1)
+      .props.changeHandler({
         target: { value: "new genre" }
       });
-    expect(component.find("[data-genre-field]").props().value).toBe(
+    expect(component.find("InputWithLabel").get(1).props.inputValue).toBe(
       "new genre"
     );
   });
@@ -144,15 +144,15 @@ describe("App component", () => {
     let component = shallow(<App />);
     expect(component.find("[data-games-list]")).toHaveLength(0);
     component
-      .find("[data-game-field]")
-      .props()
-      .onChange({
+      .find("InputWithLabel")
+      .get(0)
+      .props.changeHandler({
         target: { value: "new name" }
       });
     component
-      .find("[data-genre-field]")
-      .props()
-      .onChange({
+      .find("InputWithLabel")
+      .get(1)
+      .props.changeHandler({
         target: { value: "new genre" }
       });
     component.find("button").prop("onClick")();
